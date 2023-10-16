@@ -19,6 +19,7 @@
   },
   "devDependencies": {
     "@rocketseat/eslint-config": "^2.1.0",
+    "@types/node": "^20.8.6",
     "eslint": "^8.51.0",
     "typescript": "^5.2.2"
   }
