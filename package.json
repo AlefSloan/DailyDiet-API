@@ -11,6 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "fastify": "^4.24.2",
+    "knex": "^3.0.1",
+    "sqlite3": "^5.1.6",
     "tsx": "^3.13.0"
   },
   "devDependencies": {
