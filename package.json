@@ -7,7 +7,8 @@
     "dev": "tsx watch src/server.ts",
     "knex": "node --no-warnings --loader tsx ./node_modules/.bin/knex",
     "lint": "eslint src --ext .ts --fix",
-    "resetdb": "npm run knex migrate:rollback --all && npm run knex migrate:latest"
+    "resetdb": "npm run knex migrate:rollback --all && npm run knex migrate:latest",
+    "test": "vitest"
   },
   "keywords": [],
   "author": "",
