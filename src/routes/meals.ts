@@ -128,6 +128,50 @@ export async function mealsRoute(app: FastifyInstance) {
     {
       preHandler: [checkUserIdExists],
     },
-    async () => {},
+    async (req) => {
+      const userId = req.cookies.userId
+
+      const data = await knex('meals').where({ user_id: userId }).select()
+
+      const mealsQuantity = data.length
+
+      const mealsDiet = data.reduce(
+        (dividedValues, curr) => {
+          if (curr.is_diet) {
+            dividedValues.mealsOnDiet += 1
+            return dividedValues
+          }
+          dividedValues.mealsOffDiet += 1
+          return dividedValues
+        },
+        {
+          mealsOnDiet: 0,
+          mealsOffDiet: 0,
+        },
+      )
+
+      const bestDietMealsSequence = data.reduce(
+        (sequences, curr) => {
+          if (curr.is_diet) {
+            sequences.sequenceOffDiet = 0
+            sequences.sequenceOnDiet += 1
+            return sequences
+          }
+          sequences.sequenceOnDiet = 0
+          sequences.sequenceOffDiet += 1
+          return sequences
+        },
+        {
+          sequenceOnDiet: 0,
+          sequenceOffDiet: 0,
+        },
+      )
+
+      return {
+        mealsQuantity,
+        ...mealsDiet,
+        ...bestDietMealsSequence,
+      }
+    },
   )
 }
