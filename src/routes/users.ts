@@ -38,11 +38,6 @@ export async function usersRoute(app: FastifyInstance) {
       password,
     })
 
-    res.cookie('userId', id, {
-      path: '/',
-      maxAge: 60 * 60 * 24 * 7, // 7 days
-    })
-
     res.status(201).send()
   })
 }
